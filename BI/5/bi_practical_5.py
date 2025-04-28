@@ -14,6 +14,9 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.preprocessing import LabelEncoder
 
+import seaborn as sns
+import matplotlib.pyplot as plt
+
 # Step 1: Load Data
 df = pd.read_csv('/content/bank.csv')
 
@@ -47,7 +50,13 @@ y_pred = model.predict(X_test)
 
 # Step 7: Model Evaluation
 print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred))
+# print(confusion_matrix(y_test, y_pred))
+plt.figure(figsize=(6, 4))
+sns.heatmap(confusion_matrix(y_test, y_pred), annot=True, fmt='d', cmap='YlGnBu')
+plt.title("Confusion Matrix")
+plt.xlabel("Predicted")
+plt.ylabel("Actual")
+plt.show()
 
 print("\nClassification Report:")
 print(classification_report(y_test, y_pred))
